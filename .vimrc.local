@@ -1,0 +1,26 @@
+colorscheme ir_black
+autocmd vimenter * NERDTree
+let NERDTreeQuitOnOpen=0
+map <C-e> :NERDTreeToggle<CR>
+nmap <C-f> :CtrlP<CR>
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_max_files = 10000
+let g:ctrlp_open_multiple_files = 'v'
+nnoremap j gj
+nnoremap k gk
+nnoremap Y y$
+
+" Ctrl-a for select all
+map <C-A> ggVG
+nnoremap ; :
+
+set shell=/bin/bash
+nmap <F3> :vimgrep // *<left><left><left>
+hi SpellBad    ctermfg=015      ctermbg=000     cterm=none      guifg=#FFFFFF   guibg=#000000   gui=none
+set rtp+=$GOROOT/misc/vim
+filetype plugin indent on
+" vnoremap <C-c> "*y
+:set clipboard=unnamedplus
+noremap <silent> cp :let @+=expand("%:p")<CR>
