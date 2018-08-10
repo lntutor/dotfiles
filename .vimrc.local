@@ -31,9 +31,9 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
-    \ 'AcceptSelection("t")': ['<cr>'],
-    \ }
+            \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
+            \ 'AcceptSelection("t")': ['<cr>'],
+            \ }
 
 :set guitablabel=%t
 
@@ -56,3 +56,36 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
+
+set foldmethod=manual
+" create fold
+vnoremap sf zf
+" When on a closed fold: open it.and vice-versa.
+nnoremap sf za
+" Move downwards. to the start of the next fold.
+nnoremap sj zj
+" Move upwards. to the start of the next fold.
+nnoremap sk zk
+" zd :Delete one fold at the cursor.
+" nnoremap sd zd
+" [z :Move to the start of the current open fold.
+nnoremap s[ [z
+" ]z :Move to the end of the current open fold.
+nnoremap s] ]z
+" Close all folds
+nnoremap sm zM
+" Open all folds
+nnoremap sl zR
+
+"Save folds
+set viewoptions-=options
+augroup vimrc
+    autocmd BufWritePost *
+                \   if expand('%') != '' && &buftype !~ 'nofile'
+                \|      mkview
+                \|  endif
+    autocmd BufRead *
+                \   if expand('%') != '' && &buftype !~ 'nofile'
+                \|      silent loadview
+                \|  endif
+augroup END
