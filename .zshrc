@@ -11,7 +11,7 @@ source $ZSH/oh-my-zsh.sh
 
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/opt/idea-IC-181.4668.68/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 
 # User configuration

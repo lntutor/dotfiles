@@ -1,5 +1,3 @@
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'tyru/open-browser-github.vim'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tyru/open-browser.vim'
