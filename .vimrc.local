@@ -7,7 +7,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_max_files = 10000
-let g:ctrlp_open_multiple_files = 'v'
+" let g:ctrlp_open_multiple_files = 'v'
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
@@ -30,12 +30,7 @@ noremap <silent> cp :let @+=expand("%:p")<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-let g:ctrlp_prompt_mappings = {
-            \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
-            \ 'AcceptSelection("t")': ['<cr>'],
-            \ }
-
-:set guitablabel=%t
+" :set guitablabel=%t
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
