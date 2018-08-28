@@ -2,6 +2,10 @@ colorscheme ir_black
 autocmd vimenter * NERDTree
 let NERDTreeQuitOnOpen=0
 map <C-e> :NERDTreeToggle<CR>
+" Map NerdTree like tmux
+let NERDTreeMapOpenVSplit='v'
+let NERDTreeMapOpenSplit='s'
+
 nmap <C-f> :CtrlP<CR>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_map = '<c-p>'
@@ -34,23 +38,6 @@ nmap ga <Plug>(EasyAlign)
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-
-
-" Go to tab by number
-
-nnoremap H gT
-nnoremap L gt
-
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
 
 set foldmethod=manual
 " create fold
