@@ -1,3 +1,4 @@
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'google/vim-searchindex'

@@ -1,4 +1,8 @@
 colorscheme ir_black
+
+hi Search ctermbg=Yellow
+hi Search ctermfg=Black
+
 autocmd vimenter * NERDTree
 let NERDTreeQuitOnOpen=0
 map <C-e> :NERDTreeToggle<CR>
