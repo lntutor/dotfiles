@@ -75,3 +75,4 @@ augroup vimrc
                 \|      silent loadview
                 \|  endif
 augroup END
+map <leader><leader>z :tabnew %<cr>
