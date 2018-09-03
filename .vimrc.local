@@ -3,7 +3,7 @@ colorscheme ir_black
 hi Search ctermbg=Yellow
 hi Search ctermfg=Black
 
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 let NERDTreeQuitOnOpen=0
 map <C-e> :NERDTreeToggle<CR>
 " Map NerdTree like tmux
@@ -31,10 +31,11 @@ set rtp+=$GOROOT/misc/vim
 filetype plugin indent on
 " vnoremap <C-c> "*y
 :set clipboard=unnamedplus
+set clipboard=unnamed
 noremap <silent> cp :let @+=expand("%:p")<CR>
 
 :let mapleader=","
-
+map <leader><leader>z tabnew %<cr> 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
@@ -76,3 +77,23 @@ augroup vimrc
                 \|  endif
 augroup END
 map <leader><leader>z :tabnew %<cr>
+" Golang development setup
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+nnoremap gd :GoDef<CR>
+nnoremap gds :GoDefStack<CR>
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
+let g:go_auto_type_info = 1
+set updatetime=100
+let g:go_auto_sameids = 1
+filetype plugin on
+
