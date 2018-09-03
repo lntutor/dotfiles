@@ -77,6 +77,8 @@ augroup vimrc
                 \|  endif
 augroup END
 map <leader><leader>z :tabnew %<cr>
+
+
 " Golang development setup
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
@@ -96,4 +98,13 @@ let g:go_auto_type_info = 1
 set updatetime=100
 let g:go_auto_sameids = 1
 filetype plugin on
-
+let g:go_fmt_command = "goimports"
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-p>"
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextDiscoverDiscovery = ["&omnifunc:<c-x><c-o>"]
+autocmd FileType * 
+      \if &omnifunc != '' |
+      \call SuperTabChain(&omnifunc, "<c-p>") |
+      \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+      \endif

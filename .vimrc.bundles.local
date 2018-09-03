@@ -4,6 +4,6 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'google/vim-searchindex'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'SirVer/ultisnips'
-Plugin 'Shougo/neocomplete.vim'
 Plugin 'mdempsky/gocode', {'rtp': 'vim/'}
+Plugin 'ervandew/supertab'
 
