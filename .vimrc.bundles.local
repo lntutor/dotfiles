@@ -6,4 +6,5 @@ Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'mdempsky/gocode', {'rtp': 'vim/'}
 Plugin 'ervandew/supertab'
+Plugin 'junegunn/vim-easy-align'
 

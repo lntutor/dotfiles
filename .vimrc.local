@@ -30,8 +30,12 @@ hi SpellBad    ctermfg=015      ctermbg=000     cterm=none      guifg=#FFFFFF   
 set rtp+=$GOROOT/misc/vim
 filetype plugin indent on
 " vnoremap <C-c> "*y
-:set clipboard=unnamedplus
-set clipboard=unnamed
+if has("Linux") 
+    :set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+endif
+
 noremap <silent> cp :let @+=expand("%:p")<CR>
 
 :let mapleader=","
@@ -78,7 +82,8 @@ augroup vimrc
 augroup END
 map <leader><leader>z :tabnew %<cr>
 
-
+nnoremap <silent> <Leader>= :vertical resize +5<CR>
+nnoremap <silent> <Leader>- :vertical resize -5<CR>
 " Golang development setup
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
@@ -89,6 +94,7 @@ map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 nnoremap gd :GoDef<CR>
 nnoremap gds :GoDefStack<CR>
+nnoremap gcs :GoCallstack<CR>
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
