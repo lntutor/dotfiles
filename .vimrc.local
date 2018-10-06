@@ -30,16 +30,11 @@ hi SpellBad    ctermfg=015      ctermbg=000     cterm=none      guifg=#FFFFFF   
 set rtp+=$GOROOT/misc/vim
 filetype plugin indent on
 " vnoremap <C-c> "*y
-if has("Linux") 
-    :set clipboard=unnamedplus
-else
-    set clipboard=unnamed
-endif
-
+set clipboard=unnamedplus
 noremap <silent> cp :let @+=expand("%:p")<CR>
 
 :let mapleader=","
-map <leader><leader>z tabnew %<cr> 
+map <leader><leader>z tabnew %<cr>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
@@ -101,7 +96,6 @@ autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 autocmd FileType go nmap <Leader>i <Plug>(go-info)
 let g:go_auto_type_info = 1
-set updatetime=100
 let g:go_auto_sameids = 1
 filetype plugin on
 let g:go_fmt_command = "goimports"
@@ -109,8 +103,9 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-p>"
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextDiscoverDiscovery = ["&omnifunc:<c-x><c-o>"]
-autocmd FileType * 
-      \if &omnifunc != '' |
-      \call SuperTabChain(&omnifunc, "<c-p>") |
-      \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-      \endif
+autocmd FileType *
+            \if &omnifunc != '' |
+            \call SuperTabChain(&omnifunc, "<c-p>") |
+            \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+            \endif
+com! FormatJSON %!python -m json.tool
