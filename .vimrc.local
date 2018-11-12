@@ -45,9 +45,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 set foldmethod=manual
 " create fold
-vnoremap sf zf
+vnoremap fi zf
 " When on a closed fold: open it.and vice-versa.
-nnoremap sf za
+nnoremap fi za
 " Move downwards. to the start of the next fold.
 nnoremap sj zj
 " Move upwards. to the start of the next fold.
@@ -108,6 +108,7 @@ autocmd FileType *
             \call SuperTabChain(&omnifunc, "<c-p>") |
             \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
             \endif
+
 com! FormatJSON %!python -m json.tool
 
 " Zoom / Restore window.
