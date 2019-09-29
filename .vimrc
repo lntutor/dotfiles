@@ -1249,9 +1249,3 @@
         endif
     endif
 " }
-
-syntax enable
-set background=dark
-colorscheme solarized
-let NERDTreeQuitOnOpen=0
-let g:fzf_height = 40
