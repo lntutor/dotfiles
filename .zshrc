@@ -14,16 +14,13 @@ if [ -f '/home/loi/vexere/tools/google-cloud-sdk/path.zsh.inc' ]; then . '/home/
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/loi/vexere/tools/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/loi/vexere/tools/google-cloud-sdk/completion.zsh.inc'; fi
 
-export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 source ~/vxr-gcloud-common-alias
 
 alias help='tldr'
 
 alias k9='k9s'
-alias todo='todoist'
-alias tdl='todoist list'
+alias td='todoist'
+alias tdl='td s && td list'
 # Starter pack of aliases
 #
 # Edit your `$HOME/.bash_profile` file, and add
@@ -121,6 +118,10 @@ function dl() {
 }
 
 ## A whole pile of git aliases and functions:
+alias fzf="fzf -m"
+alias t="tmux"
+alias toc="doctoc"
+alias cal="gcalcli agenda"
 alias v='vim'
 alias c='code'
 alias cat='bat'
@@ -143,7 +144,7 @@ alias glog='git log'
 alias gloh='git log --oneline --decorate | head'
 alias gls='git ls-files'
 alias gpl='git pull'
-alias gploh='git pull origin HEAD'
+alias gploc='git pull origin $(current_branch)'
 alias gps='git push'
 alias gpsoh='git push -u origin HEAD'
 alias gpsfoh='git push -fu origin HEAD'
@@ -188,3 +189,101 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
+
+###-begin-npm-completion-###
+#
+# npm command completion script
+#
+# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
+#
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local words cword
+    if type _get_comp_words_by_ref &>/dev/null; then
+      _get_comp_words_by_ref -n = -n @ -n : -w words -i cword
+    else
+      cword="$COMP_CWORD"
+      words=("${COMP_WORDS[@]}")
+    fi
+
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${words[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+    if type __ltrim_colon_completions &>/dev/null; then
+      __ltrim_colon_completions "${words[cword]}"
+    fi
+  }
+  complete -o default -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    local si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###
+export ANDROID_HOME=/home/loi/android-sdk
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/
+export PATH=$PATH:$JAVA_HOME/bin:/usr/share/logstash/bin
+
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export CLASSPATH=".:/usr/local/lib/antlr-4.7.1-complete.jar:$CLASSPATH"
+alias antlr4='java -jar /usr/local/lib/antlr-4.7.1-complete.jar'
+alias grun='java org.antlr.v4.gui.TestRig'
+
+function sql() {
+  cloud_sql_proxy -instances=vexere-218206:asia-southeast1:$1=tcp:5432
+}
+
+alias studio='nohup /home/loi/vexere/android-studio/bin/studio.sh > /dev/null &'
+
+alias ra='react-native run-android'
+
+alias v='vim'
+
+function emulator { ( cd "$(dirname "$(whence -p emulator)")" && ./emulator "$@"; ) }
+alias emu="$ANDROID_HOME/tools/emulator"
+alias nexus="nohup emulator -avd doo1 > /dev/null &"
+
+port_forward_redis="gcloud compute ssh  database-servers-for-dev -- -N -L 6379:10.0.1.3:6379"
+
+function portkill(){
+  sudo kill -9 $(lsof -t -i:$1);
+}
+
+
+function kill_tunnel_port(){
+    portkill 6379 && portkill 6380 && portkill 6383
+}
+
